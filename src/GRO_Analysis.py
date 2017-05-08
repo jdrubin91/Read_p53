@@ -54,7 +54,7 @@ def format_boxplot(bp):
     for flier in bp['fliers']:
         flier.set(marker='o', color='#e7298a', alpha=0.5)
 
-def run(Nutlin1,GRODMSO,GRONutlin,figuredir):
+def run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir):
     x = BedTool(Nutlin1)
     y = BedTool(GRODMSO)
     z = BedTool(GRONutlin)
@@ -70,6 +70,12 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir):
     ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
     plt.savefig(figuredir + 'GRO_Analysis_Fold_Change.png', dpi=1200)
 
+    outfile = open(filedir + 'false_positives_GRO-Seq_fold_change.bed')
+    for interval in [m[:3] for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.' and float(n[3])/float(m[3]) < 1]:
+        outfile.write('\t'.join(interval) + '\n')
+
+
+
 
 if __name__ == "__main__":
     #Home directory
@@ -82,6 +88,6 @@ if __name__ == "__main__":
     Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed.true_positive.bed'
     GRODMSO = '/scratch/Users/joru1876/Allen2014_NutlinGRO/DMSO1Hr.mp.reflected.sorted.merge.BedGraph'
     GRONutlin = '/scratch/Users/joru1876/Allen2014_NutlinGRO/Nutlin1Hr.mp.reflected.sorted.merge.BedGraph'
-    run(Nutlin1,GRODMSO,GRONutlin,figuredir)
+    run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir)
 
 
