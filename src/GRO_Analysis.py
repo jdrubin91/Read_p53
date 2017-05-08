@@ -67,7 +67,8 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir):
     ax.set_title('Nutlin1hr vs. DMSO')
     ax.set_ylabel('Count')
     ax.set_xlabel('Log2 Fold Change (Nutlin/DMSO)')
-    bp = ax.boxplot([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
+    # ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
+    bp = ax.boxplot([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'])
     format_boxplot(bp)
     plt.savefig(figuredir + 'GRO_Analysis_Fold_Change.png', dpi=1200)
 
