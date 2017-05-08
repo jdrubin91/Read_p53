@@ -1,7 +1,7 @@
 __author__ = 'Jonathan Rubin'
 
 import matplotlib
-maptplotlib.use('Agg')
+matplotlib.use('Agg')
 from pybedtools import BedTool
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
