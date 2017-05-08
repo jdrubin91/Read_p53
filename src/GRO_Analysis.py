@@ -64,7 +64,7 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir):
 
     F = plt.figure()
     ax = F.add_subplot(111)
-    ax.hist([float(m[3])/float(n[3]) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0], bins =100)
+    ax.hist([float(m[3])/float(n[3]) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
     plt.savefig(figuredir + 'GRO_Analysis_Fold_Change.png', dpi=1200)
 
 
