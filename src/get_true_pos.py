@@ -15,6 +15,15 @@ def parent_dir(directory):
     
     return newdir
 
+def interval_overlap(interval1,interval2):
+    boolean = False
+    chrom1,start1,stop1 = interval1
+    chrom2,start2,stop2 = interval2
+    if chrom1 == chrom2 and (stop2 >= start1 >= start2 or start2 <= stop1 <= stop2):
+        boolean = True
+
+    return boolean
+
 def find_nearest(array):
     l = len(array)
     result = list()
@@ -140,6 +149,8 @@ def fold_change_analysis(DMSO,Nutlin1,Nutlin3):
     # plt.savefig(figuredir + 'fold_change_bp.png', dpi=1200)
     # plt.show()
 
+#This will generate the file for global true negatives taken from ALL MACS2 peaks called in any timepoint/treatment, it will also generate
+#'true_pos' files with counts that have ALL global true positives taken from the concatenated merge of all MACS2 called peaks
 def false_positive_overlap(DMSO,Nutlin1,Nutlin3,filedir):
     x = load.load_counts_file_full_intervals(DMSO)
     y = load.load_counts_file_full_intervals(Nutlin1)
@@ -202,8 +213,23 @@ def false_positive_overlap(DMSO,Nutlin1,Nutlin3,filedir):
     for interval in z:
         outfilez.write('\t'.join(interval[:3]) + '\t' + str(interval[3]) + '\n')
 
+#This is for MACS2 peaks called in a SINGLE timepoint/treatment, remove any intervals that overlap global list of true negatives
+def remove_true_neg(true_neg,intervalfile):
+    x = load.load_bed_full_intervals(true_neg)
+    y = load.load_bed_full_intervals(intervalfile)
 
+    pop = list()
+    for interval in x:
+        for i in range(len(y)):
+            if interval_overlap(interval,y[i][:3]):
+                pop.append(i)
+    pop = list(set(pop))
+    for index in sorted(pop, reverse=True):
+        del y[index]
 
+    outfile = open(intervalfile + '.true_positive.bed','w')
+    for interval in y:
+        outfile.write('\t'.join(interval) + '\n')
 
 
 
@@ -222,9 +248,14 @@ if __name__ == "__main__":
     bed3 = filedir + 'Nutlin3Hr_peaks.merge.200.bed'
     # peak_distance(bed1,bed2,bed3,figuredir)
     # width_depth_analysis(bed1,bed2,bed3,figuredir)
+
     DMSO = filedir + 'DMSO1Hr_AllPeaks_counts.bed'
     Nutlin1 = filedir + 'Nutlin1Hr_AllPeaks_counts.bed'
     Nutlin3 = filedir + 'Nutlin3Hr_AllPeaks_counts.bed'
     # fold_change_analysis(DMSO,Nutlin1,Nutlin3)
-    false_positive_overlap(DMSO,Nutlin1,Nutlin3,filedir)
+    # false_positive_overlap(DMSO,Nutlin1,Nutlin3,filedir)
+
+    true_neg = filedir + 'true_negatives.txt'
+    Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
+    remove_true_neg(true_neg, Nutlin1)
 

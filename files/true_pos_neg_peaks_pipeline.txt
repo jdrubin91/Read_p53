@@ -2,6 +2,7 @@
 2. Use bedtools merge to combine peaks within 200bp (d=200) - based on histograms of peak distance and visual inspection, we found that one 'real' peak could be called as two short distance peaks
 3. Concatenate all peaks into a single file
 4. Merge peak intervals using bedtools
-5. Based on histograms of fold changes of control vs. treatments, potential false positives for DMSO vs. 1hr Nutlin have fold changes less than 1 and for DMSO vs. 3hr Nutlin, fold changes less than 2
-6. Overlap between false positives of DMSOv1Hr and DMSOv3Hr yields 411 true negative peaks leaving 5747 true positives
+5. Count ChIP reads over list of all intervals for each condition using bedtools map (-c 4 -o sum) with bedgraphs for each condition
+6. Based on histograms of fold changes of control vs. treatments, potential false positives for DMSO vs. 1hr Nutlin have fold changes less than 1 and for DMSO vs. 3hr Nutlin, fold changes less than 2
+7. Overlap between false positives of DMSOv1Hr and DMSOv3Hr yields 411 true negative peaks leaving 5747 true positives
 

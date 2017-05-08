@@ -1,5 +1,8 @@
 __author__ = 'Jonathan Rubin'
 
+import matplotlib
+maptplotlib.use('Agg')
+from pybedtools import BedTool
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
@@ -7,11 +10,25 @@ import os
 import math
 import load
 
+
+#The purpose of this script is to take true positive MACS2 peak calls (as defined in get_true_pos.py script) and do
+#fold change analysis on corresponding GRO-Seq data (+/- Nutlin in this case)
+
+
 def parent_dir(directory):
     pathlist = directory.split('/')
     newdir = '/'.join(pathlist[0:len(pathlist)-1])
     
     return newdir
+
+def interval_overlap(interval1,interval2):
+    boolean = False
+    chrom1,start1,stop1 = interval1
+    chrom2,start2,stop2 = interval2
+    if chrom1 == chrom2 and (stop2 >= start1 >= start2 or start2 <= stop1 <= stop2):
+        boolean = True
+
+    return boolean
 
 def format_boxplot(bp):
     for box in bp['boxes']:
@@ -36,21 +53,18 @@ def format_boxplot(bp):
     for flier in bp['fliers']:
         flier.set(marker='o', color='#e7298a', alpha=0.5)
 
-def run(true_neg,Nutlin1):
-    x = load.load_bed_full_intervals(true_neg)
-    y = load.load_bed_full_intervals(Nutlin1)
+def run(Nutlin1,GRODMSO,GRONutlin,figuredir):
+    x = BedTool(Nutlin1)
+    y = BedTool(GRODMSO)
+    z = BedTool(GRONutlin)
 
-    print len(y)
-    for interval in x:
-        for i in range(len(y)-1):
-            # print x[i]
-            chrom1,start1,stop1 = interval
-            chrom2,start2,stop2 = y[i][:3]
-            if chrom1 == chrom2 and start1 == start2 and stop1 == stop2:
-                y.pop(i)
+    a = x.map(y, c='4', o='sum')
+    b = x.map(z, c='4', o='sum')
 
-    print len(y)
-
+    F = plt.figure()
+    ax = F.add_subplot(111)
+    ax.hist([m[3]/n[3] for m,n in zip(a,b) if m[3] != 0 and n[3] != 0], bins =100)
+    plt.savefig(figuredir + 'GRO_Analysis_Fold_Change.png', dpi=1200)
 
 
 if __name__ == "__main__":
@@ -61,8 +75,9 @@ if __name__ == "__main__":
     filedir = parent_dir(homedir) + '/files/'
     figuredir = parent_dir(homedir) + '/figures/'
 
-    true_neg = filedir + 'true_negatives.txt'
-    Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
-    run(true_neg,Nutlin1)
+    Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed.true_positive.bed'
+    GRODMSO = '/scratch/Users/joru1876/Allen2014_NutlinGRO/DMSO1Hr.mp.reflected.sorted.merge.BedGraph'
+    GRONutlin = '/scratch/Users/joru1876/Allen2014_NutlinGRO/Nutlin1Hr.mp.reflected.sorted.merge.BedGraph'
+    run(Nutlin1,GRODMSO,GRONutlin,figuredir)
 
 
