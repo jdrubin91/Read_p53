@@ -3,7 +3,7 @@ __author__ = 'Jonathan Rubin'
 import matplotlib
 matplotlib.use('Agg')
 import pybedtools
-# from pybedtools import BedTool
+from pybedtools import BedTool
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
@@ -55,9 +55,9 @@ def format_boxplot(bp):
         flier.set(marker='o', color='#e7298a', alpha=0.5)
 
 def run(Nutlin1,GRODMSO,GRONutlin,figuredir):
-    x = pybedtools.BedTool(Nutlin1)
-    y = pybedtools.BedTool(GRODMSO)
-    z = pybedtools.BedTool(GRONutlin)
+    x = BedTool(Nutlin1)
+    y = BedTool(GRODMSO)
+    z = BedTool(GRONutlin)
 
     a = x.map(y, c='4', o='sum')
     b = x.map(z, c='4', o='sum')
