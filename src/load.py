@@ -20,3 +20,24 @@ def load_counts_file(file1):
                 val = 0
             x.append(val)
     return x
+
+def load_counts_file_full_intervals(file1):
+    x = list()
+    with open(file1) as F:
+        for line in F:
+            line = line.strip().split()
+            chrom,start,stop = line[:-1]
+            try:
+                val = float(line[-1])
+            except ValueError:
+                val = 0
+            x.append((chrom,start,stop,val))
+    return x
+
+def load_bed_full_intervals(file1):
+    x = list()
+    with open(file1) as F:
+            for line in F:
+                chrom,start,stop = line.strip().split()
+                x.append((chrom,start,stop))
+    return x

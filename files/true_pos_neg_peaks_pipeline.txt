@@ -1,0 +1,7 @@
+1. Use MACS2 to call peaks in all samples (q=0.001)
+2. Use bedtools merge to combine peaks within 200bp (d=200) - based on histograms of peak distance and visual inspection, we found that one 'real' peak could be called as two short distance peaks
+3. Concatenate all peaks into a single file
+4. Merge peak intervals using bedtools
+5. Based on histograms of fold changes of control vs. treatments, potential false positives for DMSO vs. 1hr Nutlin have fold changes less than 1 and for DMSO vs. 3hr Nutlin, fold changes less than 2
+6. Overlap between false positives of DMSOv1Hr and DMSOv3Hr yields 411 true negative peaks leaving 5747 true positives
+

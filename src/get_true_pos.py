@@ -111,7 +111,10 @@ def fold_change_analysis(DMSO,Nutlin1,Nutlin3):
     y = load.load_counts_file(Nutlin1)
     z = load.load_counts_file(Nutlin3)
 
-    F = plt.figure()
+
+    print len([b/a for a,b in zip(x,y) if a != 0 and b/a < 1])
+    print len([b/a for a,b in zip(x,z) if a != 0 and b/a < 2])
+    # F = plt.figure()
     # ax1 = F.add_subplot(121)
     # ax1.set_title('DMSO vs. Nutlin1hr')
     # ax1.set_ylabel('Count')
@@ -121,20 +124,85 @@ def fold_change_analysis(DMSO,Nutlin1,Nutlin3):
     # ax2.set_title('DMSO vs. Nutlin3hr')
     # ax2.set_ylabel('Count')
     # ax2.set_xlabel('Fold Change')
-    # ax2.hist([b/a for a,b in zip(x,z) if a != 0 and b/a < 60],bins=100)
+    # ax2.hist([b/a for a,b in zip(x,z) if a != 0 and b/a < 12],bins=100)
     # # format_boxplot(bp1)
     # # plt.show()
     # plt.savefig(figuredir + 'fold_change_hist.png', dpi=1200)
 
-    ax1 = F.add_subplot(111)
-    ax1.set_title('p53 Peaks Fold Changes')
-    ax1.set_ylabel('Log2(Nutlin/DMSO)')
-    ax1.set_xticklabels(['1hr','3hr'])
-    bp1 = ax1.boxplot([[math.log(b/a,2) for a,b in zip(x,y) if b != 0 and a != 0],[math.log(d/c,2) for c,d in zip(x,z) if d != 0 and c!= 0]],patch_artist=True)
-    # print bp1
-    format_boxplot(bp1)
-    plt.savefig(figuredir + 'fold_change_bp.png', dpi=1200)
+
+    # ax1 = F.add_subplot(111)
+    # ax1.set_title('p53 Peaks Fold Changes')
+    # ax1.set_ylabel('Log2(Nutlin/DMSO)')
+    # ax1.set_xticklabels(['1hr','3hr'])
+    # bp1 = ax1.boxplot([[math.log(b/a,2) for a,b in zip(x,y) if b != 0 and a != 0],[math.log(d/c,2) for c,d in zip(x,z) if d != 0 and c!= 0]],patch_artist=True)
+    # # print bp1
+    # format_boxplot(bp1)
+    # plt.savefig(figuredir + 'fold_change_bp.png', dpi=1200)
     # plt.show()
+
+def false_positive_overlap(DMSO,Nutlin1,Nutlin3,filedir):
+    x = load.load_counts_file_full_intervals(DMSO)
+    y = load.load_counts_file_full_intervals(Nutlin1)
+    z = load.load_counts_file_full_intervals(Nutlin3)
+
+    # print len([b[3]/a[3] for a,b in zip(x,y) if a[3] != 0 and b[3]/a[3] < 1])
+    # print len([b[3]/a[3] for a,b in zip(x,z) if a[3] != 0 and b[3]/a[3] < 2])
+
+    false1 = list()
+    for a,b in zip(x,y):
+        D = a[3] 
+        N = b[3]
+        try:
+            fc = N/D
+            if fc < 1:
+                false1.append(a[:3])
+        except:
+            print "Error in following interval:", a, b
+
+    false2 = list()
+    for a,b in zip(x,z):
+        D = a[3] 
+        N = b[3]
+        try:
+            fc = N/D
+            if fc < 2:
+                false2.append(a[:3])
+        except:
+            print "Error in following interval:", a, b
+
+    
+    true_neg = list()
+    for interval in false1:
+        if interval in false2:
+            true_neg.append(interval)
+
+    print len(true_neg)
+
+    # outfile = open(filedir + 'true_negatives.txt','w')
+    # for interval in true_neg:
+    #     outfile.write('\t'.join(interval) + '\n')
+
+    for interval in true_neg:
+        for i in range(len(x)-1):
+            # print x[i]
+            chrom1,start1,stop1 = interval
+            chrom2,start2,stop2 = x[i][:3]
+            if chrom1 == chrom2 and start1 == start2 and stop1 == stop2:
+                x.pop(i)
+                y.pop(i)
+                z.pop(i)
+
+    outfilex = open(filedir + DMSO.split('/')[-1].split('_')[0] + '_true_pos_counts.bed','w')
+    outfiley = open(filedir + Nutlin1.split('/')[-1].split('_')[0] + '_true_pos_counts.bed','w')
+    outfilez = open(filedir + Nutlin3.split('/')[-1].split('_')[0] + '_true_pos_counts.bed','w')
+    for interval in x:
+        outfilex.write('\t'.join(interval[:3]) + '\t' + str(interval[3]) + '\n')
+    for interval in y:
+        outfiley.write('\t'.join(interval[:3]) + '\t' + str(interval[3]) + '\n')
+    for interval in z:
+        outfilez.write('\t'.join(interval[:3]) + '\t' + str(interval[3]) + '\n')
+
+
 
 
 
@@ -157,5 +225,6 @@ if __name__ == "__main__":
     DMSO = filedir + 'DMSO1Hr_AllPeaks_counts.bed'
     Nutlin1 = filedir + 'Nutlin1Hr_AllPeaks_counts.bed'
     Nutlin3 = filedir + 'Nutlin3Hr_AllPeaks_counts.bed'
-    fold_change_analysis(DMSO,Nutlin1,Nutlin3)
+    # fold_change_analysis(DMSO,Nutlin1,Nutlin3)
+    false_positive_overlap(DMSO,Nutlin1,Nutlin3,filedir)
 
