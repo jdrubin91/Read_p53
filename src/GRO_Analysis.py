@@ -70,7 +70,7 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir):
     ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
     plt.savefig(figuredir + 'GRO_Analysis_Fold_Change.png', dpi=1200)
 
-    outfile = open(filedir + 'false_positives_GRO-Seq_fold_change.bed')
+    outfile = open(filedir + 'false_positives_GRO-Seq_fold_change.bed','w')
     for interval in [m[:3] for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.' and float(n[3])/float(m[3]) < 1]:
         outfile.write('\t'.join(interval) + '\n')
 
