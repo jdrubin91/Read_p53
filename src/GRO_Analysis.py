@@ -77,7 +77,12 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir):
     outfile = open(filedir + 'false_positives_GRO-Seq_fold_change.bed','w')
     for interval in [m[:3] for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.' and float(n[3])/float(m[3]) < 1]:
         outfile.write('\t'.join(interval) + '\n')
+    outfile.close()
 
+    outfile = open(filedir + 'p53_txn_fold_change.bed','w')
+    for interval in sorted([m[:3] for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.']):
+        outfile.write('\t'.join(interval) + '\n')
+    outfile.close()
 
 
 
