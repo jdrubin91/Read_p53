@@ -80,8 +80,8 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir):
     outfile.close()
 
     outfile = open(filedir + 'p53_txn_fold_change.bed','w')
-    for interval in sorted([(m[0],m[1],m[2],float(n[3])/float(m[3])) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'],key=lambda x: x[-1]):
-        outfile.write('\t'.join(interval) + '\n')
+    for interval in sorted([(m[0],m[1],m[2],float(n[3])/float(m[3])) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], key=lambda x: x[-1]):
+        outfile.write('\t'.join(interval[:3]) + '\t' + str(interval[-1]) + '\n')
     outfile.close()
 
 
