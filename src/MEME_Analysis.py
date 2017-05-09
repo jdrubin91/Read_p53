@@ -25,7 +25,7 @@ def interval_overlap(interval1,interval2):
     return boolean
 
 def run_MEME(fastafile,outdir,scriptdir):
-    os.system("qsub -v fastafile=" + fastafile + " output=" + outdir + " " + scriptdir + "MEME_run.sh")
+    os.system("qsub -v fastafile=" + fastafile + ",output=" + outdir + " " + scriptdir + "MEME_run.sh")
 
 def run(true_neg,true_pos,DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdir):
     neg = BedTool(true_neg)
