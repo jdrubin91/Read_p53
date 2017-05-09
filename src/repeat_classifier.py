@@ -11,11 +11,12 @@ def parent_dir(directory):
     
     return newdir
 
-def remove_repeats(repeats,intervalfile):
+def remove_repeats(repeats,intervalfile,filedir):
     a = BedTool(intervalfile)
     b = BedTool(repeats)
 
-    print len(a-b)
+    (a-b).saveas(filedir + 'Non_repeat_peaks.bed')
+    (a+b).saveas(filedir + 'Repeat_peaks.bed')
 
 if __name__ == "__main__":
     #Home directory
@@ -27,4 +28,4 @@ if __name__ == "__main__":
 
     repeats = '/scratch/Users/joru1876/repeat_regions.bed'
     intervalfile = filedir + 'All_Peaks.sorted.merge.bed'
-    remove_repeats(repeats,intervalfile)
+    remove_repeats(repeats,intervalfile,filedir)
