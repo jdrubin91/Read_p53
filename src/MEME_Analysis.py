@@ -49,7 +49,7 @@ def run(true_neg,true_pos,DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdi
     D-neg-N1-N3.sequence(fi=hg19fasta).save_seqs(D_unique)
     run_MEME(D_unique,outdir+'DMSO/',scriptdir)
     
-    N1-neg-D-N3.sequence(fi=hg19fasta).save_seqs(N1_unique)
+    N1-neg-D.sequence(fi=hg19fasta).save_seqs(N1_unique)
     run_MEME(N1_unique,outdir+'Nutlin1Hr/',scriptdir)
 
     N3-neg-D-N1.sequence(fi=hg19fasta).save_seqs(N3_unique)
