@@ -64,7 +64,7 @@ if __name__ == "__main__":
     #File/Figure directory
     filedir = parent_dir(homedir) + '/files/'
     figuredir = parent_dir(homedir) + '/figures/'
-    scriptdir = paretn_dir(homedir) + '/scripts/'
+    scriptdir = parent_dir(homedir) + '/scripts/'
 
 
     true_neg = filedir + 'true_negatives.txt'
