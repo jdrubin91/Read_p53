@@ -22,5 +22,5 @@ module load meme_4.10.1_4
 
 ### now call your program
 
-/opt/meme/4.10.1_4/bin/meme $fastafile -oc $output -dna
+/opt/meme/4.10.1_4/bin/meme $fastafile -oc $output -maxsize 10000000 -dna
 
