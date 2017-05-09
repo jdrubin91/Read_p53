@@ -38,6 +38,6 @@ def load_bed_full_intervals(file1):
     x = list()
     with open(file1) as F:
             for line in F:
-                chrom,start,stop = line.strip().split()
+                chrom,start,stop = line.strip().split()[:3]
                 x.append((chrom,start,stop))
     return x

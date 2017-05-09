@@ -257,5 +257,7 @@ if __name__ == "__main__":
 
     true_neg = filedir + 'true_negatives.txt'
     Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
+    All_peaks = filedir + 'All_Peaks.sorted.merge.bed'
+    Nutlin1 = filedir + 'Nutlin1Hr_AllPeaks_counts.bed'
     remove_true_neg(true_neg, Nutlin1)
 
