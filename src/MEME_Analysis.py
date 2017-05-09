@@ -40,19 +40,19 @@ def run(true_neg,true_pos,DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdi
     N3_unique = Nutlin3 + '_unique.fasta'
     hg19 = BedTool(hg19fasta)
 
-    neg.sequence(fi=hg19fasta).saveas(negfasta)
-    pos.sequence(fi=hg19fasta).saveas(posfasta)
+    neg.sequence(fi=hg19fasta).save_seqs(negfasta)
+    pos.sequence(fi=hg19fasta).save_seqs(posfasta)
 
     run_MEME(negfasta,outdir,scriptdir)
     run_MEME(posfasta,outdir,scriptdir)
 
-    D-neg-N1-N3.sequence(fi=hg19fasta).saveas(D_unique)
+    D-neg-N1-N3.sequence(fi=hg19fasta).save_seqs(D_unique)
     run_MEME(D_unique,outdir,scriptdir)
     
-    N1-neg-D-N3.sequence(fi=hg19fasta).saveas(N1_unique)
+    N1-neg-D-N3.sequence(fi=hg19fasta).save_seqs(N1_unique)
     run_MEME(N1_unique,outdir,scriptdir)
 
-    N3-neg-D-N1.sequence(fi=hg19fasta).saveas(N3_unique)
+    N3-neg-D-N1.sequence(fi=hg19fasta).save_seqs(N3_unique)
     run_MEME(N3_unique,outdir,scriptdir)
 
 
