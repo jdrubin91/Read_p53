@@ -26,6 +26,6 @@ if __name__ == "__main__":
     filedir = parent_dir(homedir) + '/files/'
     figuredir = parent_dir(homedir) + '/figures/'
 
-    repeats = '/scratch/Users/joru1876/repeat_regions.bed'
+    repeats = filedir + 'simple_repeat_regions.bed'
     intervalfile = filedir + 'All_Peaks.sorted.merge.bed'
     remove_repeats(repeats,intervalfile,filedir)
