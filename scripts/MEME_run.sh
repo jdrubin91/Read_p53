@@ -1,5 +1,5 @@
 #PBS -q long2gb
-#PBS -S /bin/sh
+#PBS -S /bin/bash
 #PBS -N MEME
 #PBS -l nodes=1:ppn=1
 
