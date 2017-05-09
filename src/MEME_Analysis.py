@@ -43,17 +43,17 @@ def run(true_neg,true_pos,DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdi
     neg.sequence(fi=hg19fasta).save_seqs(negfasta)
     pos.sequence(fi=hg19fasta).save_seqs(posfasta)
 
-    run_MEME(negfasta,outdir,scriptdir)
-    run_MEME(posfasta,outdir,scriptdir)
+    run_MEME(negfasta,outdir+'neg/',scriptdir)
+    run_MEME(posfasta,outdir+'pos/',scriptdir)
 
     D-neg-N1-N3.sequence(fi=hg19fasta).save_seqs(D_unique)
-    run_MEME(D_unique,outdir,scriptdir)
+    run_MEME(D_unique,outdir+'DMSO/',scriptdir)
     
     N1-neg-D-N3.sequence(fi=hg19fasta).save_seqs(N1_unique)
-    run_MEME(N1_unique,outdir,scriptdir)
+    run_MEME(N1_unique,outdir+'Nutlin1Hr/',scriptdir)
 
     N3-neg-D-N1.sequence(fi=hg19fasta).save_seqs(N3_unique)
-    run_MEME(N3_unique,outdir,scriptdir)
+    run_MEME(N3_unique,outdir+'Nutlin3Hr/',scriptdir)
 
 
 
@@ -67,11 +67,11 @@ if __name__ == "__main__":
     scriptdir = parent_dir(homedir) + '/scripts/'
 
 
-    true_neg = filedir + 'true_negatives.txt'
-    true_pos = filedir + 'All_Peaks.sorted.merge.bed.true_positive.bed'
-    DMSO = filedir + 'DMSO_peaks.merge.200.bed'
-    Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
-    Nutlin3 = filedir + 'Nutlin3Hr_peaks.merge.200.bed'
+    true_neg = filedir + 'true_negatives.txt.wcut_8.bed'
+    true_pos = filedir + 'All_Peaks.sorted.merge.bed.true_positive.bed.wcut_8.bed'
+    DMSO = filedir + 'DMSO_peaks.merge.200.bed.wcut_8.bed'
+    Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed.wcut_8.bed'
+    Nutlin3 = filedir + 'Nutlin3Hr_peaks.merge.200.bed.wcut_8.bed'
     hg19fasta = '/scratch/Users/joru1876/hg19_reference_files/hg19_all.fa'
     outdir = parent_dir(homedir) + '/MEME/'
     run(true_neg,true_pos,DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdir)

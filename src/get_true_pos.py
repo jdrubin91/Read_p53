@@ -231,6 +231,17 @@ def remove_true_neg(true_neg,intervalfile):
     for interval in y:
         outfile.write('\t'.join(interval) + '\n')
 
+def remove_small_peaks(intervalfile,wcut=8):
+    x = load.load_bed_full_intervals(intervalfile)
+
+    outfile = open(intervalfile+'.wcut_' + str(wcut) + '.bed','w')
+
+    for interval in x:
+        chrom,start,stop = interval
+        if float(stop) - float(start) > wcut:
+            outfile.write('\t'.join(interval) + '\n')
+
+
 
 
 
@@ -259,5 +270,12 @@ if __name__ == "__main__":
     Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
     All_peaks = filedir + 'All_Peaks.sorted.merge.bed'
     Nutlin1 = filedir + 'Nutlin1Hr_AllPeaks_counts.bed'
-    remove_true_neg(true_neg, Nutlin1)
+    # remove_true_neg(true_neg, Nutlin1)
+
+    DMSO = filedir + 'DMSO_peaks.merge.200.bed'
+    Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
+    Nutlin3 = filedir + 'Nutlin3Hr_peaks.merge.200.bed'
+    pos = filedir + 'All_Peaks.sorted.merge.bed.true_positive.bed'
+    neg = filedir + 'true_negatives.txt'
+    remove_small_peaks(neg)
 
