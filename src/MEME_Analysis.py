@@ -29,15 +29,15 @@ def run_MEME(fastafile,outdir,scriptdir):
 
 def run(true_neg,true_pos,DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdir):
     neg = BedTool(true_neg)
-    negfasta = filedir + true_neg + '.fasta'
+    negfasta = true_neg + '.fasta'
     pos = BedTool(true_pos)
-    posfasta = filedir + true_pos + '.fasta'
+    posfasta = true_pos + '.fasta'
     D = BedTool(DMSO)
-    D_unique = filedir + DMSO + '_unique.fasta'
+    D_unique = DMSO + '_unique.fasta'
     N1 = BedTool(Nutlin1)
-    N1_unique = filedir + Nutlin1 + '_unique.fasta'
+    N1_unique = Nutlin1 + '_unique.fasta'
     N3 = BedTool(Nutlin3)
-    N3_unique = filedir + Nutlin3 + '_unique.fasta'
+    N3_unique = Nutlin3 + '_unique.fasta'
     hg19 = BedTool(hg19fasta)
 
     neg.sequence(fi=hg19fasta).saveas(negfasta)
