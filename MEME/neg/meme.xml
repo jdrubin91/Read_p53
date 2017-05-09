@@ -604,7 +604,7 @@
 </training_set>
 <model>
 <command_line>meme /scratch/Users/joru1876/Read_p53/files/true_negatives.txt.wcut_8.bed.fasta -oc /scratch/Users/joru1876/Read_p53/MEME/neg/ -maxsize 10000000 -minw 4 -dna </command_line>
-<host>node-04</host>
+<host>node-02</host>
 <type>zoops</type>
 <nmotifs>1</nmotifs>
 <evalue_threshold>inf</evalue_threshold>
@@ -642,7 +642,7 @@
 </background_frequencies>
 </model>
 <motifs>
-<motif id="motif_1" name="1" width="50" sites="266" ic="44.7" re="44.7" llr="8239" e_value="8.6e-2794" bayes_threshold="6.84768" elapsed_time="229.807064">
+<motif id="motif_1" name="1" width="50" sites="266" ic="44.7" re="44.7" llr="8239" e_value="8.6e-2794" bayes_threshold="6.84768" elapsed_time="215.145293">
 <scores>
 <alphabet_matrix>
 <alphabet_array>
