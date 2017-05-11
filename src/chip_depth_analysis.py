@@ -62,6 +62,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     ax.set_title('Wave1')
     ax.set_ylabel('Log10(FPKM)')
     ax.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
+    ax.set_ylim([-6,10])
     bp = ax.boxplot([[math.log(float(m[3])) for m in a],[math.log(float(n[3])) for n in b],[math.log(float(l[3])) for l in c]],patch_artist=True)
     format_boxplot(bp)
 
@@ -72,6 +73,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     ax2.set_title('Wave2')
     ax2.set_ylabel('Log10(FPKM)')
     ax2.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
+    ax2.set_ylim([-6,10])
     bp2 = ax2.boxplot([[math.log(float(m[3])) for m in a],[math.log(float(n[3])) for n in b],[math.log(float(l[3])) for l in c]],patch_artist=True)
     format_boxplot(bp2)
 
@@ -82,6 +84,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     ax3.set_title('Wave3')
     ax3.set_ylabel('Log10(FPKM)')
     ax3.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
+    ax3.set_ylim([-6,10])
     bp3 = ax3.boxplot([[math.log(float(m[3])) for m in a],[math.log(float(n[3])) for n in b],[math.log(float(l[3])) for l in c]],patch_artist=True)
     format_boxplot(bp3)
 
