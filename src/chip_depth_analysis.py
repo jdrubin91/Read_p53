@@ -2,6 +2,7 @@ __author__ = 'Jonathan Rubin'
 
 import os
 import sys
+import math
 import pybedtools
 import matplotlib
 matplotlib.use('Agg')
