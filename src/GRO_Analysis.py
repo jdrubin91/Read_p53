@@ -103,14 +103,14 @@ def run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,filedir):
     ax.set_title('Nutlin 1Hr All Peaks')
     ax.set_ylabel('Count')
     ax.set_xlabel('Log2 Fold Change (Nutlin/DMSO)')
-    ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
+    ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =50)
     ax.set_xlim([-20,20])
     plt.axvline(0, color='red',linestyle='dashed')
     ax = F.add_subplot(122)
-    ax.set_title('Nutlin 1Hr All Peaks')
+    ax.set_title('Nutlin 1Hr - DMSO Peaks')
     ax.set_ylabel('Count')
     ax.set_xlabel('Log2 Fold Change (Nutlin/DMSO)')
-    ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(c,d) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
+    ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(c,d) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =50)
     ax.set_xlim([-20,20])
     plt.axvline(0, color='red',linestyle='dashed')
     # ax.set_ylabel('Log2 Fold Change (Nutlin/DMSO)')
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
-    run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,filedir)
+    run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,file2dir)
 
 
 
