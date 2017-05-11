@@ -86,5 +86,5 @@ if __name__ == "__main__":
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     Nutlin3 = file2dir + 'Nutlin3Hr_peaks.merge_200.bed'
     hg19fasta = '/scratch/Users/joru1876/hg19_reference_files/hg19_all.fa'
-    outdir = parent_dir(homedir) + '/MEME/'
+    outdir = parent_dir(homedir) + '/MEME2/'
     run(DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdir)
