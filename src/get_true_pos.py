@@ -68,20 +68,20 @@ def peak_distance(bed1,bed2,bed3,figuredir):
 
     F = plt.figure()
     ax1 = F.add_subplot(221)
-    plt.hist([l for l in find_nearest(a) if l < 500],bins=100)
-    ax1.set_xlim([0,500])
+    plt.hist([l for l in find_nearest(a) if l < 5000],bins=100)
+    # ax1.set_xlim([0,500])
     ax1.set_title('DMSO')
     ax1.set_ylabel('Count')
     ax1.set_xlabel('Peak Distance')
     ax2 = F.add_subplot(222)
-    plt.hist([m for m in find_nearest(b) if m < 500],bins=100)
-    ax2.set_xlim([0,500])
+    plt.hist([m for m in find_nearest(b) if m < 5000],bins=100)
+    # ax2.set_xlim([0,500])
     ax2.set_title('Nutlin 1hr')
     ax2.set_ylabel('Count')
     ax2.set_xlabel('Peak Distance')
     ax3 = F.add_subplot(223)
-    plt.hist([n for n in find_nearest(c) if n < 500],bins=100)
-    ax3.set_xlim([0,500])
+    plt.hist([n for n in find_nearest(c) if n < 5000],bins=100)
+    # ax3.set_xlim([0,500]) 
     ax3.set_title('Nutlin 3hr')
     ax3.set_ylabel('Count')
     ax3.set_xlabel('Peak Distance')
@@ -255,10 +255,10 @@ if __name__ == "__main__":
     file2dir = parent_dir(homedir) + '/files2/'
     figuredir = parent_dir(homedir) + '/figures/'
 
-    bed1 = filedir + 'DMSO_peaks.merge.200.bed'
-    bed2 = filedir + 'Nutlin1Hr_peaks.merge.200.bed'
-    bed3 = filedir + 'Nutlin3Hr_peaks.merge.200.bed'
-    # peak_distance(bed1,bed2,bed3,figuredir)
+    bed1 = file2dir + 'DMSO1Hr_peaks.bed'
+    bed2 = file2dir + 'Nutlin1Hr_peaks.bed'
+    bed3 = file2dir + 'Nutlin3Hr_peaks.bed'
+    peak_distance(bed1,bed2,bed3,figuredir)
     # width_depth_analysis(bed1,bed2,bed3,figuredir)
 
     DMSO = filedir + 'DMSO1Hr_AllPeaks_counts.bed'
@@ -281,5 +281,5 @@ if __name__ == "__main__":
     DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     Nutlin3 = file2dir + 'Nutlin3Hr_peaks.merge_200.bed'
-    remove_small_peaks(Nutlin3)
+    # remove_small_peaks(Nutlin3)
 

@@ -86,6 +86,49 @@ def run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir):
         outfile.write('\t'.join(interval[:3]) + '\t' + str(interval[-1]) + '\n')
     outfile.close()
 
+def run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,filedir):
+    N1 = BedTool(Nutlin1)
+    D = BedTool(DMSO)
+    y = BedTool(GRODMSO)
+    z = BedTool(GRONutlin)
+
+    a = N1.map(y, c='4', o='sum')
+    b = N1.map(z, c='4', o='sum')
+
+    c = (N1-D).map(y, c='4', o='sum')
+    d = (N1-D).map(z, c='4', o='sum')
+
+    F = plt.figure()
+    ax = F.add_subplot(121)
+    ax.set_title('Nutlin 1Hr All Peaks')
+    ax.set_ylabel('Count')
+    ax.set_xlabel('Log2 Fold Change (Nutlin/DMSO)')
+    ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
+    ax.set_xlim([-20,20])
+    plt.axvline(0, color='red',linestyle='dashed')
+    ax = F.add_subplot(122)
+    ax.set_title('Nutlin 1Hr All Peaks')
+    ax.set_ylabel('Count')
+    ax.set_xlabel('Log2 Fold Change (Nutlin/DMSO)')
+    ax.hist([math.log(float(n[3])/float(m[3]),2) for m,n in zip(c,d) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], bins =100)
+    ax.set_xlim([-20,20])
+    plt.axvline(0, color='red',linestyle='dashed')
+    # ax.set_ylabel('Log2 Fold Change (Nutlin/DMSO)')
+    # ax.set_xticklabels(['Nutlin/DMSO'])
+    # bp = ax.boxplot([math.log(float(n[3])/float(m[3]),2) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'],patch_artist=True)
+    # format_boxplot(bp)
+    plt.savefig(figuredir + 'GRO_Analysis_Fold_Change_hist.png', dpi=1200)
+
+    outfile = open(filedir + 'false_positives_GRO-Seq_fold_change.bed','w')
+    for interval in [m[:3] for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.' and float(n[3])/float(m[3]) < 1]:
+        outfile.write('\t'.join(interval) + '\n')
+    outfile.close()
+
+    outfile = open(filedir + 'p53_txn_fold_change.bed','w')
+    for interval in sorted([(m[0],m[1],m[2],float(n[3])/float(m[3])) for m,n in zip(a,b) if m[3] != 0 and n[3] != 0 and m[3] != '.' and n[3] != '.'], key=lambda x: x[-1], reverse=True):
+        outfile.write('\t'.join(interval[:3]) + '\t' + str(interval[-1]) + '\n')
+    outfile.close()
+
 
 
 if __name__ == "__main__":
@@ -94,11 +137,17 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
+    file2dir = parent_dir(homedir) + '/files2/'
     figuredir = parent_dir(homedir) + '/figures/'
 
     Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed.true_positive.bed'
     GRODMSO = '/scratch/Users/joru1876/Allen2014_NutlinGRO/DMSO1Hr.mp.reflected.sorted.merge.BedGraph'
     GRONutlin = '/scratch/Users/joru1876/Allen2014_NutlinGRO/Nutlin1Hr.mp.reflected.sorted.merge.BedGraph'
     run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir)
+
+    Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
+    DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
+    run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,filedir)
+
 
 
