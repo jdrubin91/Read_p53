@@ -3,6 +3,8 @@ __author__ = 'Jonathan Rubin'
 import os
 import sys
 import pybedtools
+import matplotlib
+matplotlib.use('Agg')
 from pybedtools import BedTool
 from matplotlib import pyplot as plt
 from matplotlib import rcParams
@@ -64,7 +66,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     a = w2.map(Db, c='4', o='sum',null=0)
     b = w2.map(N1b, c='4', o='sum',null=0)
     c = w2.map(N3b, c='4', o='sum',null=0)
-    ax2 = F.add_subplot(131)
+    ax2 = F.add_subplot(132)
     ax2.set_title('Wave2')
     ax2.set_ylabel('Reads/Millions Mapped')
     ax2.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
@@ -74,7 +76,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     a = w3.map(Db, c='4', o='sum',null=0)
     b = w3.map(N1b, c='4', o='sum',null=0)
     c = w3.map(N3b, c='4', o='sum',null=0)
-    ax3 = F.add_subplot(131)
+    ax3 = F.add_subplot(133)
     ax3.set_title('Wave3')
     ax3.set_ylabel('Reads/Millions Mapped')
     ax3.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
