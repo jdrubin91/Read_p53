@@ -252,6 +252,7 @@ if __name__ == "__main__":
 
     #File directory
     filedir = parent_dir(homedir) + '/files/'
+    file2dir = parent_dir(homedir) + '/files2/'
     figuredir = parent_dir(homedir) + '/figures/'
 
     bed1 = filedir + 'DMSO_peaks.merge.200.bed'
@@ -277,5 +278,8 @@ if __name__ == "__main__":
     Nutlin3 = filedir + 'Nutlin3Hr_peaks.merge.200.bed'
     pos = filedir + 'All_Peaks.sorted.merge.bed.true_positive.bed'
     neg = filedir + 'true_negatives.txt'
-    remove_small_peaks(neg)
+    DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
+    Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
+    Nutlin3 = file2dir + 'Nutlin3Hr_peaks.merge_200.bed'
+    remove_small_peaks(Nutlin3)
 
