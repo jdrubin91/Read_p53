@@ -143,7 +143,7 @@ if __name__ == "__main__":
     Nutlin1 = filedir + 'Nutlin1Hr_peaks.merge.200.bed.true_positive.bed'
     GRODMSO = '/scratch/Users/joru1876/Allen2014_NutlinGRO/DMSO1Hr.mp.reflected.sorted.merge.BedGraph'
     GRONutlin = '/scratch/Users/joru1876/Allen2014_NutlinGRO/Nutlin1Hr.mp.reflected.sorted.merge.BedGraph'
-    run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir)
+    # run(Nutlin1,GRODMSO,GRONutlin,figuredir,filedir)
 
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
