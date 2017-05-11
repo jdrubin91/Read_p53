@@ -50,6 +50,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     w1 = D
     w2 = N1-D
     w3 = N3-N1-D
+    print len(w1),len(w2),len(w3)
 
     a = w1.map(Db, c='4', o='sum',null=0)
     b = w1.map(N1b, c='4', o='sum',null=0)
@@ -58,9 +59,9 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     F = plt.figure()
     ax = F.add_subplot(131)
     ax.set_title('Wave1')
-    ax.set_ylabel('Reads/Millions Mapped')
+    ax.set_ylabel('Log10(FPKM)')
     ax.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
-    bp = ax.boxplot([[float(m[3]) for m in a],[float(n[3]) for n in b],[float(m[3]) for l in c]],patch_artist=True)
+    bp = ax.boxplot([[math.log(float(m[3])) for m in a],[math.log(float(n[3])) for n in b],[math.log(float(l[3])) for l in c]],patch_artist=True)
     format_boxplot(bp)
 
     a = w2.map(Db, c='4', o='sum',null=0)
@@ -68,9 +69,9 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     c = w2.map(N3b, c='4', o='sum',null=0)
     ax2 = F.add_subplot(132)
     ax2.set_title('Wave2')
-    ax2.set_ylabel('Reads/Millions Mapped')
+    ax2.set_ylabel('Log10(FPKM)')
     ax2.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
-    bp2 = ax2.boxplot([[float(m[3]) for m in a],[float(n[3]) for n in b],[float(m[3]) for l in c]],patch_artist=True)
+    bp2 = ax2.boxplot([[math.log(float(m[3])) for m in a],[math.log(float(n[3])) for n in b],[math.log(float(l[3])) for l in c]],patch_artist=True)
     format_boxplot(bp2)
 
     a = w3.map(Db, c='4', o='sum',null=0)
@@ -78,9 +79,9 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     c = w3.map(N3b, c='4', o='sum',null=0)
     ax3 = F.add_subplot(133)
     ax3.set_title('Wave3')
-    ax3.set_ylabel('Reads/Millions Mapped')
+    ax3.set_ylabel('Log10(FPKM)')
     ax3.set_xticklabels(['DMSO','Nutlin 1hr','Nutlin 3hr'])
-    bp3 = ax3.boxplot([[float(m[3]) for m in a],[float(n[3]) for n in b],[float(m[3]) for l in c]],patch_artist=True)
+    bp3 = ax3.boxplot([[math.log(float(m[3])) for m in a],[math.log(float(n[3])) for n in b],[math.log(float(l[3])) for l in c]],patch_artist=True)
     format_boxplot(bp3)
 
 
