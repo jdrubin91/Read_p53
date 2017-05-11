@@ -8,6 +8,12 @@ from matplotlib import pyplot as plt
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 
+def parent_dir(directory):
+    pathlist = directory.split('/')
+    newdir = '/'.join(pathlist[0:len(pathlist)-1])
+    
+    return newdir
+
 def format_boxplot(bp):
     for box in bp['boxes']:
         # change outline color
