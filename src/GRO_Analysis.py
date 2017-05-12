@@ -130,6 +130,44 @@ def run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,filedir):
     outfile.close()
 
 
+def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figuredir,file2dir,genes,promoters):
+    N1 = BedTool(Nutlin1)
+    D = BedTool(DMSO)
+    DC = BedTool(DMSOCHIP)
+    NC = BedTool(Nutlin1CHIP)
+    GD = BedTool(GRODMSO)
+    GN1 = BedTool(GRONutlin)
+    g = BedTool(genes)
+    p = BedTool(promoters)
+
+    a = (g+N1+p).map(DMSOCHIP, c=4, o="sum", null="0")
+    b = (g+N1+p).map(Nutlin1CHIP, c=4, o="sum", null="0")
+    c = (g+N1+p).map(GRODMSO, c=4, o="sum", null="0")
+    d = (g+N1+p).map(GRONutlin, c=4, o="sum", null="0")
+
+
+
+    F = plt.figure()
+    ax = F.add_subplot(121)
+    ax.set_title('Gene Target')
+    ax.set_ylabel('ChIP-Seq signal at promoter Log2(Nutlin1hr/DMSO)')
+    ax.set_xlabel('GRO-Seq signal at gene target Log2(Nutlin1hr/DMSO)')
+    ax.scatter([float(n[3])/float(m[3]) for m,n in zip(a,b) if n[3] != "0" and m[3] != "0"], [float(l[3])/float(k[3]) for l,k in zip(c,d) if l[3] != "0" and k[3] != "0"])
+
+    a = (N1-p).map(DMSOCHIP, c=4, o="sum", null="0")
+    b = (N1-p).map(Nutlin1CHIP, c=4, o="sum", null="0")
+    c = (N1-p).map(GRODMSO, c=4, o="sum", null="0")
+    d = (N1-p).map(GRONutlin, c=4, o="sum", null="0")
+
+    ax2 = F.add_subplot(122)
+    ax2.set_title('ChIP-Seq Peaks (non-gene associated)')
+    ax2.set_ylabel('ChIP-Seq Log2(Nutlin1hr/DMSO)')
+    ax2.set_xlabel('GRO-Seq Log2(Nutlin1hr/DMSO)')
+    ax2.scatter([float(n[3])/float(m[3]) for m,n in zip(a,b) if n[3] != "0" and m[3] != "0"], [float(l[3])/float(k[3]) for l,k in zip(c,d) if l[3] != "0" and k[3] != "0"])
+
+    plt.savefig(figuredir + 'ChIP_GRO_scatter.png', dpi=1200)
+
+
 
 if __name__ == "__main__":
     #Home directory
@@ -147,7 +185,13 @@ if __name__ == "__main__":
 
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
-    run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,file2dir)
+    # run2(Nutlin1,DMSO,GRODMSO,GRONutlin,figuredir,file2dir)
+
+    genes = file2dir + 'refGene.bed'
+    promoters = file2dir + 'refGene_hg19_TSS.bed'
+    DMSObedgraph = '/projects/dowellLab/Taatjes/170420_K00262_0091_AHJTMHBBXX/trimmed/cat/bowtie2/sortedbam/genomecoveragebed/fortdf/DMSO1Hr_trimmed.fastq.bowtie2.sorted.reflected.BedGraph'
+    Nutlin1bedgraph = '/projects/dowellLab/Taatjes/170420_K00262_0091_AHJTMHBBXX/trimmed/cat/bowtie2/sortedbam/genomecoveragebed/fortdf/Nutlin1Hr_trimmed.fastq.bowtie2.sorted.reflected.BedGraph'
+    chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figuredir,file2dir,genes,promoters)
 
 
 
