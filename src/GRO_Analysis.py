@@ -152,12 +152,12 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
         try:
             x.append(math.log(float(n[3])/float(m[3]),2))
         except:
-            x.append(0)
+            print ""
     for l,k in zip(c,d):
         try:
             y.append(math.log(float(k[-1])/float(l[-1]),2))
         except:
-            y.append(0)
+            print ""
 
     F = plt.figure()
     ax = F.add_subplot(121)
