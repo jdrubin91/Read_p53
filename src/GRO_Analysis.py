@@ -142,7 +142,6 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
 
     a = (N1+p).map(DMSOCHIP, c='4', o="sum", null="0")
     b = (N1+p).map(Nutlin1CHIP, c='4', o="sum", null="0")
-    print a,b
     c = (N1+p).intersect(g,wb=True,u=True).sort().map(GRODMSO, c='4', o="sum", null="0")
     d = (N1+p).intersect(g,wb=True,u=True).sort().map(GRONutlin, c='4', o="sum", null="0")
 
@@ -165,6 +164,7 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     ax.set_title('Gene Target')
     ax.set_ylabel('ChIP-Seq signal at promoter Log2(Nutlin1hr/DMSO)')
     ax.set_xlabel('GRO-Seq signal at gene target Log2(Nutlin1hr/DMSO)')
+    ax.set_ylim([-2,12])
     ax.scatter(y,x)
 
     a = (N1).map(DMSOCHIP, c='4', o="sum", null="0")
@@ -189,7 +189,7 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     ax2.set_title('ChIP-Seq Peaks (non-gene associated)')
     ax2.set_ylabel('ChIP-Seq Log2(Nutlin1hr/DMSO)')
     ax2.set_xlabel('GRO-Seq Log2(Nutlin1hr/DMSO)')
-    # ax2.set_xlim([-5,20])
+    ax2.set_ylim([-10,20])
     ax2.scatter(y,x)
 
     plt.savefig(figuredir + 'ChIP_GRO_scatter.png', dpi=1200)
