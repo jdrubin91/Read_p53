@@ -147,6 +147,8 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     c = (g+N1+p).map(GRODMSO, c=4, o="sum", null="0")
     d = (g+N1+p).map(GRONutlin, c=4, o="sum", null="0")
 
+    print len(a), len(c)
+
 
 
     F = plt.figure()
