@@ -137,7 +137,7 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     NC = BedTool(Nutlin1CHIP)
     GD = BedTool(GRODMSO)
     GN1 = BedTool(GRONutlin)
-    g = BedTool(genes)
+    g = BedTool(genes).sort()
     p = BedTool(promoters)
 
     a = (N1+p).map(DMSOCHIP, c=4, o="sum", null="0")
