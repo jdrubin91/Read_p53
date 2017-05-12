@@ -189,8 +189,8 @@ if __name__ == "__main__":
 
     genes = file2dir + 'refGene.bed'
     promoters = file2dir + 'refGene_hg19_TSS.bed'
-    DMSObedgraph = '/projects/dowellLab/Taatjes/170420_K00262_0091_AHJTMHBBXX/trimmed/cat/bowtie2/sortedbam/genomecoveragebed/fortdf/DMSO1Hr_trimmed.fastq.bowtie2.sorted.reflected.BedGraph'
-    Nutlin1bedgraph = '/projects/dowellLab/Taatjes/170420_K00262_0091_AHJTMHBBXX/trimmed/cat/bowtie2/sortedbam/genomecoveragebed/fortdf/Nutlin1Hr_trimmed.fastq.bowtie2.sorted.reflected.BedGraph'
+    DMSOCHIP = '/projects/dowellLab/Taatjes/170420_K00262_0091_AHJTMHBBXX/trimmed/cat/bowtie2/sortedbam/genomecoveragebed/fortdf/DMSO1Hr_trimmed.fastq.bowtie2.sorted.reflected.BedGraph'
+    Nutlin1CHIP = '/projects/dowellLab/Taatjes/170420_K00262_0091_AHJTMHBBXX/trimmed/cat/bowtie2/sortedbam/genomecoveragebed/fortdf/Nutlin1Hr_trimmed.fastq.bowtie2.sorted.reflected.BedGraph'
     chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figuredir,file2dir,genes,promoters)
 
 
