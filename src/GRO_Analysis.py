@@ -152,7 +152,7 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     ax.set_title('Gene Target')
     ax.set_ylabel('ChIP-Seq signal at promoter Log2(Nutlin1hr/DMSO)')
     ax.set_xlabel('GRO-Seq signal at gene target Log2(Nutlin1hr/DMSO)')
-    ax.scatter([float(n[3])/float(m[3]) for m,n in zip(a,b) if n[3] != "0" and m[3] != "0"], [float(l[3])/float(k[3]) for l,k in zip(c,d) if l[3] != "0" and k[3] != "0"])
+    ax.scatter([float(n[3])/float(m[3]) for m,n in zip(a,b) if n[3] != "0" and m[3] != "0"], [float(l[-1])/float(k[-1]) for l,k in zip(c,d) if l[-1] != "0" and k[-1] != "0"])
 
     a = (N1).map(DMSOCHIP, c=4, o="sum", null="0")
     b = (N1).map(Nutlin1CHIP, c=4, o="sum", null="0")
