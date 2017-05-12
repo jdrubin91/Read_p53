@@ -154,12 +154,12 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     y = list()
     for m,n in zip(a,b):
         try:
-            x.append(float(n[3])/float(m[3])) 
+            x.append(math.log(float(n[3])/float(m[3]),2))
         except:
             x.append(0)
     for l,k in zip(c,d):
         try:
-            y.append(float(l[-1])/float(k[-1]))
+            y.append(math.log(float(l[-1])/float(k[-1]),2))
         except:
             y.append(0)
 
@@ -179,12 +179,12 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     y = list()
     for m,n in zip(a,b):
         try:
-            x.append(float(n[3])/float(m[3])) 
+            x.append(math.log(float(n[3])/float(m[3]),2))
         except:
             x.append(0)
     for l,k in zip(c,d):
         try:
-            y.append(float(l[-1])/float(k[-1]))
+            y.append(math.log(float(l[-1])/float(k[-1]),2))
         except:
             y.append(0)
 
@@ -192,6 +192,7 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     ax2.set_title('ChIP-Seq Peaks (non-gene associated)')
     ax2.set_ylabel('ChIP-Seq Log2(Nutlin1hr/DMSO)')
     ax2.set_xlabel('GRO-Seq Log2(Nutlin1hr/DMSO)')
+    # ax2.set_xlim([-5,20])
     ax2.scatter(x,y)
 
     plt.savefig(figuredir + 'ChIP_GRO_scatter.png', dpi=1200)
