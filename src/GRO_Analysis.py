@@ -139,16 +139,12 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     GN1 = BedTool(GRONutlin)
     g = BedTool(genes).sort().merge()
     p = BedTool(promoters)
-    # p = BedTool([(gene[0],gene[1],gene[1]) for gene in g])
 
-    print len(g), len(p)
+    a = (N1+p).map(DMSOCHIP, c='4', o="sum", null="0")
+    b = (N1+p).map(Nutlin1CHIP, c='4', o="sum", null="0")
+    c = (N1+p).intersect(g,wb=True,u=True).sort().map(GRODMSO, c='4', o="sum", null="0")
+    d = (N1+p).intersect(g,wb=True,u=True).sort().map(GRONutlin, c='4', o="sum", null="0")
 
-    a = (N1+p).map(DMSOCHIP, c=4, o="sum", null="0")
-    b = (N1+p).map(Nutlin1CHIP, c=4, o="sum", null="0")
-    c = (N1+p).intersect(g,wb=True,u=True).sort().map(GRODMSO, c=4, o="sum", null="0")
-    d = (N1+p).intersect(g,wb=True,u=True).sort().map(GRONutlin, c=4, o="sum", null="0")
-
-    print len(a), len(c)
 
     x = list()
     y = list()
@@ -170,10 +166,10 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     ax.set_xlabel('GRO-Seq signal at gene target Log2(Nutlin1hr/DMSO)')
     ax.scatter(x,y)
 
-    a = (N1).map(DMSOCHIP, c=4, o="sum", null="0")
-    b = (N1).map(Nutlin1CHIP, c=4, o="sum", null="0")
-    c = (N1).map(GRODMSO, c=4, o="sum", null="0")
-    d = (N1).map(GRONutlin, c=4, o="sum", null="0")
+    a = (N1).map(DMSOCHIP, c='4', o="sum", null="0")
+    b = (N1).map(Nutlin1CHIP, c='4', o="sum", null="0")
+    c = (N1).map(GRODMSO, c='4', o="sum", null="0")
+    d = (N1).map(GRONutlin, c='4', o="sum", null="0")
 
     x = list()
     y = list()
