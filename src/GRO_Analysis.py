@@ -140,8 +140,8 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     g = BedTool(genes)
     p = BedTool(promoters)
 
-    a = (g+N1+p).map(DMSOCHIP, c=4, o="sum", null="0")
-    b = (g+N1+p).map(Nutlin1CHIP, c=4, o="sum", null="0")
+    a = (N1+p).map(DMSOCHIP, c=4, o="sum", null="0")
+    b = (N1+p).map(Nutlin1CHIP, c=4, o="sum", null="0")
     c = (g+N1+p).map(GRODMSO, c=4, o="sum", null="0")
     d = (g+N1+p).map(GRONutlin, c=4, o="sum", null="0")
 
@@ -154,10 +154,10 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
     ax.set_xlabel('GRO-Seq signal at gene target Log2(Nutlin1hr/DMSO)')
     ax.scatter([float(n[3])/float(m[3]) for m,n in zip(a,b) if n[3] != "0" and m[3] != "0"], [float(l[3])/float(k[3]) for l,k in zip(c,d) if l[3] != "0" and k[3] != "0"])
 
-    a = (N1-p).map(DMSOCHIP, c=4, o="sum", null="0")
-    b = (N1-p).map(Nutlin1CHIP, c=4, o="sum", null="0")
-    c = (N1-p).map(GRODMSO, c=4, o="sum", null="0")
-    d = (N1-p).map(GRONutlin, c=4, o="sum", null="0")
+    a = (N1).map(DMSOCHIP, c=4, o="sum", null="0")
+    b = (N1).map(Nutlin1CHIP, c=4, o="sum", null="0")
+    c = (N1).map(GRODMSO, c=4, o="sum", null="0")
+    d = (N1).map(GRONutlin, c=4, o="sum", null="0")
 
     ax2 = F.add_subplot(122)
     ax2.set_title('ChIP-Seq Peaks (non-gene associated)')
