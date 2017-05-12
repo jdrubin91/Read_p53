@@ -142,6 +142,7 @@ def chip_gro_scatter(Nutlin1,DMSO,DMSOCHIP,Nutlin1CHIP,GRODMSO,GRONutlin,figured
 
     a = (N1+p).map(DMSOCHIP, c='4', o="sum", null="0")
     b = (N1+p).map(Nutlin1CHIP, c='4', o="sum", null="0")
+    print a,b
     c = (N1+p).intersect(g,wb=True,u=True).sort().map(GRODMSO, c='4', o="sum", null="0")
     d = (N1+p).intersect(g,wb=True,u=True).sort().map(GRONutlin, c='4', o="sum", null="0")
 
