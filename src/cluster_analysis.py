@@ -55,28 +55,28 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax1.set_ylabel('Count')
     ax1.set_xlabel('Distance (bp)')
     ax1.set_xlim([0,35000000])
-    ax1.hist([float(x[-1]) for x in a],bins=100)
+    ax1.hist([float(x[-1]) for x in a],bins=range(min(0), max(35000000) + 350000, 350000))
 
     ax2 = F.add_subplot(222)
     ax2.set_title('Wave2rand to Wave1rand')
     ax2.set_ylabel('Count')
     ax2.set_xlabel('Distance (bp)')
     ax2.set_xlim([0,35000000])
-    ax2.hist([float(x[-1]) for x in b],bins=100)
+    ax2.hist([float(x[-1]) for x in b],bins=range(min(0), max(35000000) + 350000, 350000))
 
     ax3 = F.add_subplot(223)
     ax3.set_title('Wave3 to Wave2')
     ax3.set_ylabel('Count')
     ax3.set_xlabel('Distance (bp)')
     ax3.set_xlim([0,35000000])
-    ax3.hist([float(x[-1]) for x in c],bins=100)
+    ax3.hist([float(x[-1]) for x in c],bins=range(min(0), max(35000000) + 350000, 350000))
 
     ax4 = F.add_subplot(224)
     ax4.set_title('Wave3rand to Wave2rand')
     ax4.set_ylabel('Count')
     ax4.set_xlabel('Distance (bp)')
     ax4.set_xlim([0,35000000])
-    ax4.hist([float(x[-1]) for x in d],bins=100)
+    ax4.hist([float(x[-1]) for x in d],bins=range(min(0), max(35000000) + 350000, 350000))
 
 
 
@@ -144,8 +144,8 @@ if __name__ == "__main__":
     P53 = file2dir + 'HO_P53_HUMAN.H10MO.B.pval-6.bed'
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.bed'
     P53 = '/scratch/Users/joru1876/P53_fimo.bed'
-    # run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
+    run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
 
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.no_header.bed'
     P53 = '/scratch/Users/joru1876/P53_fimo.no_header.bed'
-    nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
+    # nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
