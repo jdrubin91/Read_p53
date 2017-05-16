@@ -144,8 +144,8 @@ if __name__ == "__main__":
     P53 = file2dir + 'HO_P53_HUMAN.H10MO.B.pval-6.bed'
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.bed'
     P53 = '/scratch/Users/joru1876/P53_fimo.bed'
-    run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
+    # run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
 
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.no_header.bed'
-    P53 = '/scratch/Users/joru1876/P53_fimo.bed'
-    # nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
+    P53 = '/scratch/Users/joru1876/P53_fimo.no_header.bed'
+    nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
