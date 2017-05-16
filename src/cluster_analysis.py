@@ -147,4 +147,5 @@ if __name__ == "__main__":
     run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
 
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.no_header.bed'
+    P53 = '/scratch/Users/joru1876/P53_fimo.bed'
     # nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
