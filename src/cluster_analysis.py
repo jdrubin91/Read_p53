@@ -143,7 +143,7 @@ if __name__ == "__main__":
     Nutlin3 = file2dir + 'Nutlin3Hr_peaks.merge_200.bed'
     P53 = file2dir + 'HO_P53_HUMAN.H10MO.B.pval-6.bed'
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.bed'
-    # run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
+    run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
 
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.no_header.bed'
-    nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
+    # nearest_neighbor(DMSO,Nutlin1,Nutlin3,P53)
