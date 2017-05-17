@@ -40,6 +40,8 @@ def run(DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdir):
     N3_unique = Nutlin3 + '_unique.fasta'
     hg19 = BedTool(hg19fasta)
 
+    print len(D), len(N1-D), len(N3-D-N1)
+
     # neg.sequence(fi=hg19fasta).save_seqs(negfasta)
     # pos.sequence(fi=hg19fasta).save_seqs(posfasta)
 
