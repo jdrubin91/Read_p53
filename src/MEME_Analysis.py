@@ -57,14 +57,14 @@ def run(DMSO,Nutlin1,Nutlin3,hg19fasta,outdir,filedir,scriptdir):
     # (N3-neg-D-N1).sequence(fi=hg19fasta).save_seqs(N3_unique)
     # run_MEME(N3_unique,outdir+'Nutlin3Hr/',scriptdir)
 
-    (D).sequence(fi=hg19fasta).save_seqs(D_unique)
-    run_MEME(D_unique,outdir+'DMSO/',scriptdir)
+    # (D).sequence(fi=hg19fasta).save_seqs(D_unique)
+    # run_MEME(D_unique,outdir+'DMSO/',scriptdir)
     
-    (N1-D).sequence(fi=hg19fasta).save_seqs(N1_unique)
-    run_MEME(N1_unique,outdir+'Nutlin1Hr/',scriptdir)
+    # (N1-D).sequence(fi=hg19fasta).save_seqs(N1_unique)
+    # run_MEME(N1_unique,outdir+'Nutlin1Hr/',scriptdir)
 
-    (N3-D-N1).sequence(fi=hg19fasta).save_seqs(N3_unique)
-    run_MEME(N3_unique,outdir+'Nutlin3Hr/',scriptdir)
+    # (N3-D-N1).sequence(fi=hg19fasta).save_seqs(N3_unique)
+    # run_MEME(N3_unique,outdir+'Nutlin3Hr/',scriptdir)
 
 
 
