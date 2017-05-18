@@ -51,10 +51,10 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     c = w3.closest(w2, d=True)
     d = w3rand.closest(w2rand, d=True)
 
-    w21 = [math.log(float(x[-1])) for x in a]
-    w2r1r = [math.log(float(x[-1])) for x in b]
-    w32 = [math.log(float(x[-1])) for x in c]
-    w3r2r = [math.log(float(x[-1])) for x in d]
+    w21 = [math.log(float(x[-1])) for x in a if float(x[-1]) != 0]
+    w2r1r = [math.log(float(x[-1])) for x in b if float(x[-1]) != 0]
+    w32 = [math.log(float(x[-1])) for x in c if float(x[-1]) != 0]
+    w3r2r = [math.log(float(x[-1])) for x in d if float(x[-1]) != 0]
 
     print stats.ks_2samp(w21, w2r1r)
     print stats.ks_2samp(w32, w3r2r)
