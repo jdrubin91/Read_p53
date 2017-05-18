@@ -51,13 +51,45 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     c = w3.closest(w2, d=True)
     d = w3rand.closest(w2rand, d=True)
 
-    w21 = [math.log(float(x[-1])) for x in a if float(x[-1]) != 0]
-    w2r1r = [math.log(float(x[-1])) for x in b if float(x[-1]) != 0]
-    w32 = [math.log(float(x[-1])) for x in c if float(x[-1]) != 0]
-    w3r2r = [math.log(float(x[-1])) for x in d if float(x[-1]) != 0]
 
-    print stats.ks_2samp(w21, w2r1r)
-    print stats.ks_2samp(w32, w3r2r)
+    w21 = list()
+    w2r1r = list()
+    w32 = list()
+    w3r2r = list()
+
+    for x in a:
+        try:
+            w21.append(math.log(float(x[-1])))
+        except:
+            w21.append(0)
+
+    for x in b:
+        try:
+            w2r1r.append(math.log(float(x[-1])))
+        except:
+            w2r1r.append(0)
+
+    for x in c:
+        try:
+            w32.append(math.log(float(x[-1])))
+        except:
+            w32.append(0)
+
+    for x in d:
+        try:
+            w3r2r.append(math.log(float(x[-1])))
+        except:
+            w3r2r.append(0)
+
+
+
+    # w21 = [math.log(float(x[-1])) for x in a if float(x[-1]) != 0]
+    # w2r1r = [math.log(float(x[-1])) for x in b if float(x[-1]) != 0]
+    # w32 = [math.log(float(x[-1])) for x in c if float(x[-1]) != 0]
+    # w3r2r = [math.log(float(x[-1])) for x in d if float(x[-1]) != 0]
+
+    # print stats.ks_2samp(w21, w2r1r)
+    # print stats.ks_2samp(w32, w3r2r)
 
     F = plt.figure()
     ax1 = F.add_subplot(221)
