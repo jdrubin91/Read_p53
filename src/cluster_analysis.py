@@ -11,6 +11,7 @@ import os
 from numpy import random as rn
 import load
 from scipy import stats
+import math
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -50,10 +51,10 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     c = w3.closest(w2, d=True)
     d = w3rand.closest(w2rand, d=True)
 
-    w21 = [float(x[-1]) for x in a]
-    w2r1r = [float(x[-1]) for x in b]
-    w32 = [float(x[-1]) for x in c]
-    w3r2r = [float(x[-1]) for x in d]
+    w21 = [math.log(float(x[-1])) for x in a]
+    w2r1r = [math.log(float(x[-1])) for x in b]
+    w32 = [math.log(float(x[-1])) for x in c]
+    w3r2r = [math.log(float(x[-1])) for x in d]
 
     print stats.ks_2samp(w21, w2r1r)
     print stats.ks_2samp(w32, w3r2r)
@@ -66,7 +67,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax1.set_xlim([0,500000])
     ax1.set_ylim([0,600])
     ax1.hist(w21,bins=range(0, 35000000 + 350000, 350000))
-    ax1.set_xscale('log')
+    # ax1.set_xscale('log')
 
     ax2 = F.add_subplot(222)
     ax2.set_title('Wave2rand to Wave1rand')
@@ -75,7 +76,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax2.set_xlim([0,500000])
     ax2.set_ylim([0,600])
     ax2.hist(w2r1r,bins=range(0, 35000000 + 350000, 350000))
-    ax2.set_xscale('log')
+    # ax2.set_xscale('log')
 
     ax3 = F.add_subplot(223)
     ax3.set_title('Wave3 to Wave2 (pval: ' + str(stats.ks_2samp(w32, w3r2r)[1]) + ')')
@@ -84,7 +85,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax3.set_xlim([0,500000])
     ax3.set_ylim([0,3500])
     ax3.hist(w32,bins=range(0, 35000000 + 350000, 350000))
-    ax3.set_xscale('log')
+    # ax3.set_xscale('log')
 
     ax4 = F.add_subplot(224)
     ax4.set_title('Wave3rand to Wave2rand')
@@ -93,7 +94,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax4.set_xlim([0,500000])
     ax4.set_ylim([0,3500])
     ax4.hist(w3r2r,bins=range(0, 35000000 + 350000, 350000))
-    ax4.set_xscale('log')
+    # ax4.set_xscale('log')
 
 
 
