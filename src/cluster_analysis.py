@@ -39,11 +39,11 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     P = BedTool(P53).cut([0,1,2])
 
 
-    w1 = D
+    w1 = D+P
     w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
-    w2 = N1-D
+    w2 = N1+P-D
     w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
-    w3 = N3-N1-D
+    w3 = N3+P-N1-D
     w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
 
     a = w2.closest(w1, d=True)
