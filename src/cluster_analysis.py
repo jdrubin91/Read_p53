@@ -12,6 +12,7 @@ from numpy import random as rn
 import load
 from scipy import stats
 import math
+import time
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -38,13 +39,23 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     N3 = BedTool(Nutlin3)
     P = BedTool(P53).cut([0,1,2])
 
-
+    start = time.time()
+    # run your code
+    
     w1 = D+P
     w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
     w2 = N1+P-D
     w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
     w3 = N3+P-N1-D
     w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
+
+    end = time.time()
+
+    print end - start
+
+    print len(w1),len(w1rand)
+    print len(w2),len(w2rand)
+    print len(w3),len(w3rand)
 
     a = w2.closest(w1, d=True)
     b = w2rand.closest(w1rand, d=True)
