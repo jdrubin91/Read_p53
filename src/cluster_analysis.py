@@ -51,8 +51,6 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     c = w3.closest(w2, d=True)
     d = w3rand.closest(w2rand, d=True)
 
-    print len(a),len(b),len(c),len(d)
-
 
     w21 = list()
     w2r1r = list()
@@ -83,7 +81,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
         except:
             w3r2r.append(0)
 
-
+    print len(w21),len(w2r1r),len(w32),len(w3r2r)
 
     # w21 = [math.log(float(x[-1])) for x in a if float(x[-1]) != 0]
     # w2r1r = [math.log(float(x[-1])) for x in b if float(x[-1]) != 0]
@@ -94,7 +92,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # print stats.ks_2samp(w32, w3r2r)
 
     F = plt.figure()
-    ax1 = F.add_subplot(121)
+    ax1 = F.add_subplot(211)
     ax1.set_title('Wave2 to Wave1 (pval: ' + str(stats.ks_2samp(w21, w2r1r)[1]) + ')')
     ax1.set_ylabel('Count')
     ax1.set_xlabel('Distance (bp)')
@@ -115,7 +113,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # ax2.hist(w2r1r,bins=range(0, 35000000 + 350000, 350000))
     # ax2.set_xscale('log')
 
-    ax3 = F.add_subplot(122)
+    ax3 = F.add_subplot(212)
     ax3.set_title('Wave3 to Wave2 (pval: ' + str(stats.ks_2samp(w32, w3r2r)[1]) + ')')
     ax3.set_ylabel('Count')
     ax3.set_xlabel('Distance (bp)')
