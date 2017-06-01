@@ -38,9 +38,6 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     N1 = BedTool(Nutlin1)
     N3 = BedTool(Nutlin3)
     P = BedTool(P53).cut([0,1,2])
-
-    start = time.time()
-    # run your code
     
     w1 = D+P
     w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
@@ -49,18 +46,12 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     w3 = N3+P-N1-D
     w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
 
-    end = time.time()
-
-    print end - start
-
-    print len(w1),len(w1rand)
-    print len(w2),len(w2rand)
-    print len(w3),len(w3rand)
-
     a = w2.closest(w1, d=True)
     b = w2rand.closest(w1rand, d=True)
     c = w3.closest(w2, d=True)
     d = w3rand.closest(w2rand, d=True)
+
+    print len(a),len(b),len(c),len(d)
 
 
     w21 = list()
