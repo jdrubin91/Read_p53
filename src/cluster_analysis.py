@@ -110,7 +110,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax1.legend(['Observed','Expected'])
     # ax2.set_xlim([0,500000])
     # ax2.set_ylim([0,600])
-    ax2.hist(w2r1r,bins=np.arange(0, 18 + 0.2, 0.2))
+    ax1.hist(w2r1r,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax2.set_xscale('log')
 
     ax3 = F.add_subplot(212)
@@ -131,7 +131,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax3.legend(['Observed','Expected'])
     # ax4.set_xlim([0,500000])
     # ax4.set_ylim([0,3500])
-    ax4.hist(w3r2r,bins=np.arange(0, 18 + 0.2, 0.2))
+    ax3.hist(w3r2r,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax4.set_xscale('log')
 
 
