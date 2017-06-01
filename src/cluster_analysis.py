@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import os
+import numpy as np
 from numpy import random as rn
 import load
 from scipy import stats
 import math
-import time
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -99,7 +99,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax1.hist(w21,bins=100,alpha=0.5,color='green')
     # ax1.set_xlim([0,500000])
     # ax1.set_ylim([0,600])
-    # ax1.hist(w21,bins=range(0, 35000000 + 350000, 350000))
+    ax1.hist(w21,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax1.set_xscale('log')
 
     # ax2.F.add_subplot(222)
@@ -110,7 +110,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax1.legend(['Observed','Expected'])
     # ax2.set_xlim([0,500000])
     # ax2.set_ylim([0,600])
-    # ax2.hist(w2r1r,bins=range(0, 35000000 + 350000, 350000))
+    ax2.hist(w2r1r,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax2.set_xscale('log')
 
     ax3 = F.add_subplot(212)
@@ -120,7 +120,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax3.hist(w32,bins=100,alpha=0.5,color='green')
     # ax3.set_xlim([0,500000])
     # ax3.set_ylim([0,3500])
-    # ax3.hist(w32,bins=range(0, 35000000 + 350000, 350000))
+    ax3.hist(w32,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax3.set_xscale('log')
 
     # ax4 = F.add_subplot(224)
@@ -131,7 +131,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax3.legend(['Observed','Expected'])
     # ax4.set_xlim([0,500000])
     # ax4.set_ylim([0,3500])
-    # ax4.hist(w3r2r,bins=range(0, 35000000 + 350000, 350000))
+    ax4.hist(w3r2r,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax4.set_xscale('log')
 
 
