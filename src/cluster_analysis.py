@@ -92,7 +92,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # print stats.ks_2samp(w32, w3r2r)
 
     F = plt.figure()
-    ax1 = F.add_subplot(211)
+    ax1 = F.add_subplot(221)
     ax1.set_title('Wave2 to Wave1 (pval: ' + str(stats.ks_2samp(w21, w2r1r)[1]) + ')')
     ax1.set_ylabel('Count')
     ax1.set_xlabel('Log 10 Distance (bp)')
@@ -113,7 +113,22 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # ax1.hist(w2r1r,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax2.set_xscale('log')
 
-    ax3 = F.add_subplot(212)
+    ax2 = F.add_subplot(222)
+    ax2.set_title('Cumulative distribution function')
+    ax2.set_ylabel('CDF')
+    ax2.set_xlabel('Log 10 Distance (bp)')
+    # Use the histogram function to bin the data
+    counts, bin_edges = np.histogram(w21, bins=np.arange(0, 18 + 0.2, 0.2), normed=True)
+    counts_r, bin_edges_r = np.histogram(w2r1r, bins=np.arange(0, 18 + 0.2, 0.2), normed=True)
+    # Now find the cdf
+    cdf = np.cumsum(counts)
+    cdf_r = np.cumsum(counts_r)
+    # And finally plot the cdf
+    plt.plot(bin_edges[1:], cdf, color='green')
+    plt.plot(bin_edges_r[1:], cdf_r, color='red')
+    ax2.legend(['Observed','Expected'],loc='upper left')
+
+    ax3 = F.add_subplot(223)
     ax3.set_title('Wave3 to Wave2 (pval: ' + str(stats.ks_2samp(w32, w3r2r)[1]) + ')')
     ax3.set_ylabel('Count')
     ax3.set_xlabel('Log 10 Distance (bp)')
@@ -122,6 +137,21 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # ax3.set_ylim([0,3500])
     # ax3.hist(w32,bins=np.arange(0, 18 + 0.2, 0.2))
     # ax3.set_xscale('log')
+
+    ax4 = F.add_subplot(224)
+    ax4.set_title('Cumulative distribution function')
+    ax4.set_ylabel('CDF')
+    ax4.set_xlabel('Log 10 Distance (bp)')
+    # Use the histogram function to bin the data
+    counts, bin_edges = np.histogram(w32, bins=np.arange(0, 18 + 0.2, 0.2), normed=True)
+    counts_r, bin_edges_r = np.histogram(w3r2r, bins=np.arange(0, 18 + 0.2, 0.2), normed=True)
+    # Now find the cdf
+    cdf = np.cumsum(counts)
+    cdf_r = np.cumsum(counts_r)
+    # And finally plot the cdf
+    plt.plot(bin_edges[1:], cdf, color='green')
+    plt.plot(bin_edges_r[1:], cdf_r, color='red')
+    ax2.legend(['Observed','Expected'],loc='upper left')
 
     # ax4 = F.add_subplot(224)
     # ax4.set_title('Wave3rand to Wave2rand')
