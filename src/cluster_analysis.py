@@ -50,7 +50,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     start = time.time()
 
     w1 = D+P
-    print rn.shuffle(P)[:len(w1)]
+    print rn.shuffle(list(P))[:len(w1)]
     w1rand = BedTool(rn.shuffle(P)[:len(w1)]).sort()
     w2 = N1+P-D
     w2rand = BedTool(rn.shuffle(P)[:len(w2)]).sort()
