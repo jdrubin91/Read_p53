@@ -40,22 +40,22 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     N3 = BedTool(Nutlin3)
     P = BedTool(P53).cut([0,1,2])
     
-    # w1 = D+P
-    # w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
-    # w2 = N1+P-D
-    # w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
-    # w3 = N3+P-N1-D
-    # w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
-
     start = time.time()
 
     w1 = D+P
-    print rn.shuffle(list(P))[:len(w1)]
-    w1rand = BedTool(rn.shuffle(P)[:len(w1)]).sort()
+    w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
     w2 = N1+P-D
-    w2rand = BedTool(rn.shuffle(P)[:len(w2)]).sort()
+    w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
     w3 = N3+P-N1-D
-    w3rand = BedTool(rn.shuffle(P)[:len(w3)]).sort()
+    w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
+
+    # w1 = D+P
+    # print rn.shuffle(list(P))[:len(w1)]
+    # w1rand = BedTool(rn.shuffle(P)[:len(w1)]).sort()
+    # w2 = N1+P-D
+    # w2rand = BedTool(rn.shuffle(P)[:len(w2)]).sort()
+    # w3 = N3+P-N1-D
+    # w3rand = BedTool(rn.shuffle(P)[:len(w3)]).sort()
 
     end = time.time()
 
