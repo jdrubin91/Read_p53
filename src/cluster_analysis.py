@@ -13,6 +13,7 @@ from numpy import random as rn
 import load
 from scipy import stats
 import math
+import time
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -39,12 +40,25 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     N3 = BedTool(Nutlin3)
     P = BedTool(P53).cut([0,1,2])
     
+    # w1 = D+P
+    # w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
+    # w2 = N1+P-D
+    # w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
+    # w3 = N3+P-N1-D
+    # w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
+
+    start = time.time()
+
     w1 = D+P
-    w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
+    w1rand = BedTool(rn.shuffle(P)[:len(w1)]).sort()
     w2 = N1+P-D
-    w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
+    w2rand = BedTool(rn.shuffle(P)[:len(w2)]).sort()
     w3 = N3+P-N1-D
-    w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
+    w3rand = BedTool(rn.shuffle(P)[:len(w3)]).sort()
+
+    end = time.time()
+
+    print(end - start)
 
     a = w2.closest(w1, d=True)
     b = w2rand.closest(w1rand, d=True)
@@ -59,25 +73,25 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
 
     for x in a:
         try:
-            w21.append(math.log(float(x[-1])))
+            w21.append(math.log(float(x[-1]),10))
         except:
             w21.append(0)
 
     for x in b:
         try:
-            w2r1r.append(math.log(float(x[-1])))
+            w2r1r.append(math.log(float(x[-1]),10))
         except:
             w2r1r.append(0)
 
     for x in c:
         try:
-            w32.append(math.log(float(x[-1])))
+            w32.append(math.log(float(x[-1]),10))
         except:
             w32.append(0)
 
     for x in d:
         try:
-            w3r2r.append(math.log(float(x[-1])))
+            w3r2r.append(math.log(float(x[-1]),10))
         except:
             w3r2r.append(0)
 
