@@ -151,7 +151,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # And finally plot the cdf
     plt.plot(bin_edges[1:], cdf, color='green')
     plt.plot(bin_edges_r[1:], cdf_r, color='red')
-    ax2.legend(['Observed','Expected'],loc='upper left')
+    ax4.legend(['Observed','Expected'],loc='upper left')
 
     # ax4 = F.add_subplot(224)
     # ax4.set_title('Wave3rand to Wave2rand')
