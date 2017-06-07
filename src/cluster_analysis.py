@@ -34,7 +34,7 @@ def find_nearest(array):
 
     return result
 
-def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
+def run(DMSO,Nutlin1,Nutlin3,P53,figuredir,file2dir):
     D = BedTool(DMSO)
     N1 = BedTool(Nutlin1)
     N3 = BedTool(Nutlin3)
@@ -42,11 +42,11 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     
     start = time.time()
 
-    w1 = D+P
+    w1 = (D+P).saveas(file2dir + 'Wave1.bed')
     w1rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w1))]).sort()
-    w2 = N1+P-D
+    w2 = (N1+P-D).saveas(file2dir + 'Wave2.bed')
     w2rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w2))]).sort()
-    w3 = N3+P-N1-D
+    w3 = (N3+P-N1-D).saveas(file2dir + 'Wave3.bed')
     w3rand = BedTool([P[i] for i in rn.randint(0,len(P),len(w3))]).sort()
 
     # w1 = D+P
@@ -111,7 +111,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax1.set_title('Wave2 to Wave1 (pval: ' + str(stats.ks_2samp(w21, w2r1r)[1]) + ')')
     ax1.set_ylabel('Count')
     ax1.set_xlabel('Log 10 Distance (bp)')
-    ax1.hist(w21,bins=np.arange(0, 18 + 0.2, 0.2),alpha=0.5,color='green')
+    ax1.hist(w21,bins=np.arange(0, 8 + 0.2, 0.2),alpha=0.5,color='green')
     # ax1.set_xlim([0,500000])
     # ax1.set_ylim([0,600])
     # ax1.hist(w21,bins=np.arange(0, 18 + 0.2, 0.2))
@@ -121,7 +121,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # ax2.set_title('Wave2rand to Wave1rand')
     # ax2.set_ylabel('Count')
     # ax2.set_xlabel('Distance (bp)')
-    ax1.hist(w2r1r,bins=np.arange(0, 18 + 0.2, 0.2),alpha=0.5,color='red')
+    ax1.hist(w2r1r,bins=np.arange(0, 8 + 0.2, 0.2),alpha=0.5,color='red')
     ax1.legend(['Observed','Expected'],loc='upper left')
     # ax2.set_xlim([0,500000])
     # ax2.set_ylim([0,600])
@@ -147,7 +147,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     ax3.set_title('Wave3 to Wave2 (pval: ' + str(stats.ks_2samp(w32, w3r2r)[1]) + ')')
     ax3.set_ylabel('Count')
     ax3.set_xlabel('Log 10 Distance (bp)')
-    ax3.hist(w32,bins=np.arange(0, 18 + 0.2, 0.2),alpha=0.5,color='green')
+    ax3.hist(w32,bins=np.arange(0, 8 + 0.2, 0.2),alpha=0.5,color='green')
     # ax3.set_xlim([0,500000])
     # ax3.set_ylim([0,3500])
     # ax3.hist(w32,bins=np.arange(0, 18 + 0.2, 0.2))
@@ -172,7 +172,7 @@ def run(DMSO,Nutlin1,Nutlin3,P53,figuredir):
     # ax4.set_title('Wave3rand to Wave2rand')
     # ax4.set_ylabel('Count')
     # ax4.set_xlabel('Distance (bp)')
-    ax3.hist(w3r2r,bins=np.arange(0, 18 + 0.2, 0.2),alpha=0.5,color='red')
+    ax3.hist(w3r2r,bins=np.arange(0, 8 + 0.2, 0.2),alpha=0.5,color='red')
     ax3.legend(['Observed','Expected'],loc='upper left')
     # ax4.set_xlim([0,500000])
     # ax4.set_ylim([0,3500])
@@ -245,7 +245,7 @@ if __name__ == "__main__":
     P53 = file2dir + 'HO_P53_HUMAN.H10MO.B.pval-6.bed'
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.bed'
     P53 = '/scratch/Users/joru1876/P53_fimo.bed'
-    run(DMSO,Nutlin1,Nutlin3,P53,figuredir)
+    run(DMSO,Nutlin1,Nutlin3,P53,figuredir,file2dir)
 
     P53 = '/Users/jonathanrubin/Google Drive/Colorado University/Jonathan/P53_fimo.no_header.bed'
     P53 = '/scratch/Users/joru1876/P53_fimo.no_header.bed'
