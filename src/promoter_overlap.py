@@ -7,8 +7,8 @@ import sys
 import pybedtools
 from pybedtools import BedTool
 from matplotlib import pyplot as plt
-from matplotlib import rcParams
-rcParams.update({'figure.autolayout': True})
+# from matplotlib import rcParams
+# rcParams.update({'figure.autolayout': True})
 import numpy as np
 
 def parent_dir(directory):
@@ -30,7 +30,7 @@ def run(promoters, DMSO, Nutlin1, Nutlin3, figuredir):
     p2 = plt.bar(ind,(len(D+p),len(N1+p),len(N3+p)),width,color='red')
     plt.ylabel('Peaks')
     plt.title('Peak Promoter Association')
-    plt.xticks(ind, ('DMSO', 'Nutlin 1Hr', 'Nutlin 3Hr'))
+    plt.xticks(ind+(width/2), ('DMSO', 'Nutlin 1Hr', 'Nutlin 3Hr'))
     plt.legend((p1[0], p2[0]), ('Non-promoter', 'Promoter associated'))
     plt.savefig(figuredir + 'peak_promoter_overlap.png',dpi=1200)
 
