@@ -9,6 +9,7 @@ from matplotlib import pyplot as plt
 # rcParams.update({'figure.autolayout': True})
 import numpy as np
 from matplotlib_venn import venn3, venn3_circles
+from matplotlib_venn import venn2, venn2_circles
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -44,6 +45,19 @@ def run(DMSO,Nutlin1,Nutlin3,figuredir):
     plt.savefig(figuredir + 'venn_diagram.png',dpi=1200)
     # plt.show()
 
+def promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir):
+    D = BedTool(DMSO)
+    N1 = BedTool(Nutlin1)
+    N3 = BedTool(Nutlin3)
+    p = BedTool(promoters)
+
+    AB = len(D+p)
+    aB = 0
+    Ab = len(D) - AB
+    plt.figure()
+    v = venn2(subsets(1,2,3), set_labels = ('DMSO','Promoters'))
+
+
 def example():
     plt.figure(figsize=(4,4))
     v = venn3(subsets=(1, 1, 1, 1, 1, 1, 1), set_labels = ('A', 'B', 'C'))
@@ -73,7 +87,9 @@ if __name__ == "__main__":
     DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     Nutlin3 = file2dir + 'Nutlin3Hr_peaks.merge_200.bed'
-    run(DMSO,Nutlin1,Nutlin3,figuredir)
+    # run(DMSO,Nutlin1,Nutlin3,figuredir)
 
-    # example()
+    promoters = file2dir + 'refGene_hg19_TSS.bed'
+
+    promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir)
 
