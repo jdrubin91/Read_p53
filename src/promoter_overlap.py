@@ -31,6 +31,7 @@ def run(promoters, DMSO, Nutlin1, Nutlin3, figuredir):
     plt.ylabel('Peaks')
     plt.title('Peak Promoter Association')
     plt.xticks(ind+(width/2), ('DMSO', 'Nutlin 1Hr', 'Nutlin 3Hr'))
+    plt.yticks(np.arange(0, 10000, 1000))
     plt.legend((p1[0], p2[0]), ('Non-promoter', 'Promoter associated'))
     plt.savefig(figuredir + 'peak_promoter_overlap.png',dpi=1200)
 
