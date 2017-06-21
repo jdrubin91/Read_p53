@@ -32,7 +32,8 @@ def run(DMSO,Nutlin1,Nutlin3,figuredir):
     
 
     plt.figure()
-    v = venn3(subsets=(a, b, c, d, e, f, g), set_labels = ('DMSO', 'Nutlin 1hr', 'Nutlin 3hr'))
+    # v = venn3(subsets=(a, b, c, d, e, f, g), set_labels = ('DMSO', 'Nutlin 1hr', 'Nutlin 3hr'))
+    v = venn3(subsets=(a, b, c, d, e, f, g))
     # v.get_patch_by_id('100').set_alpha(1.0)
     # v.get_patch_by_id('100').set_color('white')
     # v.get_label_by_id('100').set_text('Unknown')
@@ -42,7 +43,7 @@ def run(DMSO,Nutlin1,Nutlin3,figuredir):
     # c[0].set_ls('dotted')
     plt.title("Peak Overlaps")
     plt.text('DMSO', xy=xy)
-    plt.savefig(figuredir + 'venn_diagram.png',dpi=1200)
+    plt.savefig(figuredir + 'venn_diagram.svg',dpi=1200)
     # plt.show()
 
 def promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir):
