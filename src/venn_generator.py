@@ -8,8 +8,8 @@ from matplotlib import pyplot as plt
 # from matplotlib import rcParams
 # rcParams.update({'figure.autolayout': True})
 import numpy as np
-from matplotlib_venn import venn3, venn3_circles
-from matplotlib_venn import venn2, venn2_circles
+# from matplotlib_venn import venn3, venn3_circles
+# from matplotlib_venn import venn2, venn2_circles
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -29,21 +29,23 @@ def run(DMSO,Nutlin1,Nutlin3,figuredir):
     e = len(N3+D-N1)
     f = len(N3+N1-D)
     g = len(N3+N1+D)
+
+    print [a, b, c, d, e, f, g]
     
 
-    plt.figure()
-    # v = venn3(subsets=(a, b, c, d, e, f, g), set_labels = ('DMSO', 'Nutlin 1hr', 'Nutlin 3hr'))
-    v = venn3(subsets=(a, b, c, d, e, f, g))
-    # v.get_patch_by_id('100').set_alpha(1.0)
-    # v.get_patch_by_id('100').set_color('white')
-    # v.get_label_by_id('100').set_text('Unknown')
-    # xy = v.get_label_by_id('100').get_position()
-    # v.get_label_by_id('DMSO').set_text('')
-    # c[0].set_lw(1.0)
-    # c[0].set_ls('dotted')
-    plt.title("Peak Overlaps")
-    plt.text('DMSO', xy=xy)
-    plt.savefig(figuredir + 'venn_diagram.svg',dpi=1200)
+    # plt.figure()
+    # # v = venn3(subsets=(a, b, c, d, e, f, g), set_labels = ('DMSO', 'Nutlin 1hr', 'Nutlin 3hr'))
+    # v = venn3(subsets=(a, b, c, d, e, f, g))
+    # # v.get_patch_by_id('100').set_alpha(1.0)
+    # # v.get_patch_by_id('100').set_color('white')
+    # # v.get_label_by_id('100').set_text('Unknown')
+    # # xy = v.get_label_by_id('100').get_position()
+    # # v.get_label_by_id('DMSO').set_text('')
+    # # c[0].set_lw(1.0)
+    # # c[0].set_ls('dotted')
+    # plt.title("Peak Overlaps")
+    # plt.text('DMSO', xy=xy)
+    # plt.savefig(figuredir + 'venn_diagram.svg',dpi=1200)
     # plt.show()
 
 def promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir):
@@ -90,11 +92,11 @@ if __name__ == "__main__":
     DMSO = file2dir + 'DMSO1Hr_peaks.merge_200.bed'
     Nutlin1 = file2dir + 'Nutlin1Hr_peaks.merge_200.bed'
     Nutlin3 = file2dir + 'Nutlin3Hr_peaks.merge_200.bed'
-    # run(DMSO,Nutlin1,Nutlin3,figuredir)
+    run(DMSO,Nutlin1,Nutlin3,figuredir)
 
     promoters = file2dir + 'refGene_hg19_TSS.bed'
 
-    promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir)
+    # promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir)
 
     # example()
 
