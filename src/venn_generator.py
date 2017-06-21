@@ -2,14 +2,14 @@ __author__ = 'Jonathan Rubin'
 
 import os
 import sys
-import pybedtools
+# import pybedtools
 from pybedtools import BedTool
 from matplotlib import pyplot as plt
 # from matplotlib import rcParams
 # rcParams.update({'figure.autolayout': True})
 import numpy as np
-# from matplotlib_venn import venn3, venn3_circles
-# from matplotlib_venn import venn2, venn2_circles
+from matplotlib_venn import venn3, venn3_circles
+from matplotlib_venn import venn2, venn2_circles
 
 def parent_dir(directory):
     pathlist = directory.split('/')
@@ -18,34 +18,34 @@ def parent_dir(directory):
     return newdir
 
 def run(DMSO,Nutlin1,Nutlin3,figuredir):
-    D = BedTool(DMSO)
-    N1 = BedTool(Nutlin1)
-    N3 = BedTool(Nutlin3)
+    # D = BedTool(DMSO)
+    # N1 = BedTool(Nutlin1)
+    # N3 = BedTool(Nutlin3)
 
-    a = len(D) - len(D+N1-N3) - len(D+N3-N1) - len(N3+N1+D)
-    b = len(N1) - len(N1+D-N3) - len(N1+N3-D) - len(N3+N1+D)
-    c = len(D+N1-N3)
-    d = len(N3) - len(N3+D-N1) - len(N3+N1-D) - len(N3+N1+D)
-    e = len(N3+D-N1)
-    f = len(N3+N1-D)
-    g = len(N3+N1+D)
+    # a = len(D) - len(D+N1-N3) - len(D+N3-N1) - len(N3+N1+D)
+    # b = len(N1) - len(N1+D-N3) - len(N1+N3-D) - len(N3+N1+D)
+    # c = len(D+N1-N3)
+    # d = len(N3) - len(N3+D-N1) - len(N3+N1-D) - len(N3+N1+D)
+    # e = len(N3+D-N1)
+    # f = len(N3+N1-D)
+    # g = len(N3+N1+D)
 
-    print [a, b, c, d, e, f, g]
+    [a, b, c, d, e, f, g] = [11, 9, 6, 5386, 4, 2415, 672]
     
 
-    # plt.figure()
-    # # v = venn3(subsets=(a, b, c, d, e, f, g), set_labels = ('DMSO', 'Nutlin 1hr', 'Nutlin 3hr'))
-    # v = venn3(subsets=(a, b, c, d, e, f, g))
-    # # v.get_patch_by_id('100').set_alpha(1.0)
-    # # v.get_patch_by_id('100').set_color('white')
-    # # v.get_label_by_id('100').set_text('Unknown')
-    # # xy = v.get_label_by_id('100').get_position()
-    # # v.get_label_by_id('DMSO').set_text('')
-    # # c[0].set_lw(1.0)
-    # # c[0].set_ls('dotted')
-    # plt.title("Peak Overlaps")
+    plt.figure()
+    # v = venn3(subsets=(a, b, c, d, e, f, g), set_labels = ('DMSO', 'Nutlin 1hr', 'Nutlin 3hr'))
+    v = venn3(subsets=(a, b, c, d, e, f, g))
+    # v.get_patch_by_id('100').set_alpha(1.0)
+    # v.get_patch_by_id('100').set_color('white')
+    # v.get_label_by_id('100').set_text('Unknown')
+    # xy = v.get_label_by_id('100').get_position()
+    # v.get_label_by_id('DMSO').set_text('')
+    # c[0].set_lw(1.0)
+    # c[0].set_ls('dotted')
+    plt.title("Peak Overlaps")
     # plt.text('DMSO', xy=xy)
-    # plt.savefig(figuredir + 'venn_diagram.svg',dpi=1200)
+    plt.savefig(figuredir + 'venn_diagram.svg',dpi=1200)
     # plt.show()
 
 def promoter_overlap(promoters, DMSO, Nutlin1, Nutlin3, figuredir):
