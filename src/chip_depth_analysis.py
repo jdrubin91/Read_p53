@@ -89,7 +89,7 @@ def run(DMSO,Nutlin1,Nutlin3,DMSObedgraph,Nutlin1bedgraph,Nutlin3bedgraph,figure
     format_boxplot(bp3)
 
 
-    plt.savefig(figuredir + 'ChIP_Depth_Waves_bp.png', dpi=1200)
+    plt.savefig(figuredir + 'ChIP_Depth_Waves_bp.svg', dpi=1200)
 
 
 
